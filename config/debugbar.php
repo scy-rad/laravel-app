@@ -125,7 +125,7 @@ return [
         'events'          => true,//false, // All events fired
         'default_request' => true,//false, // Regular or special Symfony request logger
         'logs'            => true,//false, // Add the latest log messages
-        'files'           => true,//false, // Show the included files
+        'files'           => false, // Show the included files
         'config'          => true,//false, // Display config settings
         'cache'           => true,//false, // Display cache events
         'models'          => true,//true,  // Display models
