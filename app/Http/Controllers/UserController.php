@@ -104,7 +104,8 @@ class UserController extends Controller
 
     public function testStore(Request $request, int $id)
     {
-        if (!$request->isMethod('post')) {
+        if (!$request->isMethod('post')) 
+        {
             return 'Nie jest post';
         }
 
