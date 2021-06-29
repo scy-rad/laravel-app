@@ -13,6 +13,12 @@ class UserController extends Controller
         return view('user.list');
     }
 
+    public function show(Int $userID)
+    {
+        return view('user.show', ['userID' => $userID]);
+    }
+
+
 
 
 

@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\View;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,5 +25,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+        view()->share('applicationName', 'Laravel Game'); //pierwszy sposób współdzielenia
+        view::share('FasadaName', 'Laravel Facade Game'); //współdzielenie za pomocą fasady
     }
 }
