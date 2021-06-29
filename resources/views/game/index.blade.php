@@ -5,6 +5,7 @@
 @foreach ($gamelist as $onegame)
 <li>{{$onegame['name']}}</li>
 
+
 nie mogę wywołać create, edit
 
 {{ Form::open(array('url' => 'games/', 'method' => 'GET', 'class'=>'col-md-12')) }}
