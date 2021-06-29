@@ -7,6 +7,14 @@ use Faker\Factory;
 
 class GameController extends Controller
 {
+
+    // CRUD
+    // C - create
+    // R - read
+    // U - update
+    // D - delete
+
+
     /**
      * Display a listing of the resource.
      *

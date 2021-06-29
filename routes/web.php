@@ -25,6 +25,26 @@ Route::get('user/{id}',
 'User\ProfilController'
 );
 
+
+Route::get('users', 'UserController@list')
+    ->name('get.users');
+
+
+Route::get('users/test/{id}', 'UserController@testShow')
+    ->name('get.users.test.show');
+
+Route::post('users/test/post/{id}', 'UserController@testStore')
+    ->name('post.users.test.store');
+
+Route::get('users/{id}', 'User\ProfilController@show')
+    ->name('get.user.profile');
+
+
+Route::get('users/{id}/address', 'User\ShowAddress')
+    ->where(['id' => '[0-9]+'])
+    ->name('get.user.address');
+
+
 /*
 $uri='/games';
 Route::get('games', 'GameController@index');
