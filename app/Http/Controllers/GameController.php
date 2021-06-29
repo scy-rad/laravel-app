@@ -12,7 +12,7 @@ class GameController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
 
@@ -28,7 +28,7 @@ class GameController extends Controller
         }
 
 
-
+dump ($request);
         return view('game.index', [
             'gamelist' => $gamelist
 
