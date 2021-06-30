@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use Faker\Factory;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -15,7 +16,18 @@ class UserController extends Controller
 
     public function show(Int $userID)
     {
-        return view('user.show', ['userID' => $userID]);
+        $users =[];
+        $faker = Factory::create('PL_pl');
+        $count = 10;//$faker->numberBetween(3,15);
+        for ($i = 0; $i < $count; $i++) {
+            $users[] = [
+                'id' => $faker->numberBetween(1,1000),
+                'imie' => $faker->firstName,
+                'nazwisko' => $faker->lastName,
+                'promotor' => $faker->name
+            ];
+        }
+        return view('user.show', ['userID' => $userID, 'users' => $users]);
     }
 
 
@@ -104,7 +116,7 @@ class UserController extends Controller
 
     public function testStore(Request $request, int $id)
     {
-        if (!$request->isMethod('post')) 
+        if (!$request->isMethod('post'))
         {
             return 'Nie jest post';
         }

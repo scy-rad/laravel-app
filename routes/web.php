@@ -21,6 +21,7 @@ Route::get('users/{id}',
 'User\ProfilController@show'
 );
 
+
 Route::get('users/{userID}/profile', 'UserController@show')
     ->name('user.show');
 
