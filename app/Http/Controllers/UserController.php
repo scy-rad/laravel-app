@@ -11,11 +11,35 @@ class UserController extends Controller
 {
     public function list(Request $request)
     {
+
+        $session = $request->session();
+        $session->put('prevAction', __METHOD__ . ':'. time());      //zapisuje klucz do sesji
+
+        dump($request->session()->get('flashTestParam'));
+
+        $session->flash('flashTestParam', 'byłem tu dziś');         //zapisuje klucz do sesji - ale usunie ją automatycznie po odczytaniu :)
+
+        dump($session);
+        dump($session->get('prevAction'));
         return view('user.list');
     }
 
-    public function show(Int $userID)
+    public function show(Request $request, Int $userID)
     {
+        $prevSession = $request->session()->get('prevAction');
+        dump($prevSession);
+        // $request->session()->put('test_tt', true);
+        //     dump($request->session()->has('test_tt'));
+        //     dump($request->session()->exists('test_tt'));
+        // $request->session()->forget('test_tt');
+        //     dump($request->session()->has('test_tt'));
+        //     dump($request->session()->exists('test_tt'));
+
+        //     dump($request->session()->all());
+
+        // $request->session()->flush();   //czyszczxenie wszystkich danych sesji
+
+        dump($request->session()->get('flashTestParam'));
         $users =[];
         $faker = Factory::create('PL_pl');
         $count = 10;//$faker->numberBetween(3,15);

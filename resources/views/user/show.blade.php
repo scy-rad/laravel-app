@@ -12,6 +12,10 @@
     @endauth
 @endsection
 
+<a href="{{ route('get.users') }}">WSZYSCY</a>
+<br>
+
+
 @isset($nick)
     pokaże nick tylko wtedy, kiedy on jest zainicjowany
 @else
