@@ -16,6 +16,21 @@
 <br>
 
 
+@if (session('Losowanko')===0)
+    <div class="alert alert-danger" role="alert">
+    wylosowano 0
+    </div>
+@elseif (session('Losowanko')===1)
+    <div class="alert alert-success" role="alert">
+    wylosowano 1
+    </div>
+@else
+    <div class="alert alert-dark" role="alert">
+    nic nie wylosowano
+    </div>
+@endif
+
+
 @isset($nick)
     pokaże nick tylko wtedy, kiedy on jest zainicjowany
 @else

@@ -14,19 +14,26 @@ class UserController extends Controller
 
         $session = $request->session();
         $session->put('prevAction', __METHOD__ . ':'. time());      //zapisuje klucz do sesji
+        //session(['prevAction' => __METHOD__ . ':'. time()]);      //zapisuje klucz do sesji za pośrednictwem helpera
 
-        dump($request->session()->get('flashTestParam'));
+        //dump($request->session()->get('flashTestParam'));
 
         $session->flash('flashTestParam', 'byłem tu dziś');         //zapisuje klucz do sesji - ale usunie ją automatycznie po odczytaniu :)
 
-        dump($session);
-        dump($session->get('prevAction'));
+        //dump($session);
+        //dump($session->get('prevAction'));
+
+        $faker = Factory::create('PL_pl');
+        $idX = $faker->numberBetween(0,1);
+        $session->flash('Losowanko', $idX);
+
         return view('user.list');
     }
 
     public function show(Request $request, Int $userID)
     {
         $prevSession = $request->session()->get('prevAction');
+        //$prevSession = session('prevAction'); zapis alternatywny za pomocą helpera
         dump($prevSession);
         // $request->session()->put('test_tt', true);
         //     dump($request->session()->has('test_tt'));
@@ -53,8 +60,6 @@ class UserController extends Controller
         }
         return view('user.show', ['userID' => $userID, 'users' => $users]);
     }
-
-
 
 
 
