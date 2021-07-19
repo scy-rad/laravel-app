@@ -16,37 +16,18 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'Home\MainPage')
     ->name('home.mainPage');
 
-Route::get('users/{id}',
-'User\ProfilController@show'
-);
-
-
-Route::get('users/{userID}/profile', 'UserController@show')
-    ->name('user.show');
-
-
-Route::get('user/{id}',
-'User\ProfilController'
-);
-
-
 Route::get('users', 'UserController@list')
     ->name('get.users');
 
+Route::get('users/{userId}', 'UserController@show')
+    ->name('get.user.show');
 
-Route::get('users/test/{id}', 'UserController@testShow')
-    ->name('get.users.test.show');
-
-Route::post('users/test/post/{id}', 'UserController@testStore')
-    ->name('post.users.test.store');
-
-Route::get('users/{id}', 'User\ProfilController@show')
-    ->name('get.user.profile');
-
+//Route::get('users/{id}/profile', 'User\ProfilController@show')
+//    ->name('get.user.profile');
 
 Route::get('users/{id}/address', 'User\ShowAddress')
     ->where(['id' => '[0-9]+'])
-    ->name('get.user.address');
+    ->name('get.users.address');
 
 
 /*
@@ -61,12 +42,12 @@ Route::delete($uri, fn() => 'jestem DELETE');
 */
 
 Route::resource('games', 'GameController');
-/*
--> only([
-    'index', 'show'
-]);
+
+// -> only([
+//     'index', 'show'
+// ]);
 Route::resource('admin/games', 'GameController')
 -> only([
     'store', 'create', 'destroy'
 ]);
-*/
+

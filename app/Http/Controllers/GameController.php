@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Faker\Factory;
+use Illuminate\Support\Facades\DB;
 
 class GameController extends Controller
 {
@@ -24,23 +25,87 @@ class GameController extends Controller
     {
         //
 
-        $faker= Factory::create('pl_PL');
+//         $faker= Factory::create('pl_PL');
 
-        for ($i = 0; $i < 3; $i++) {
-            $gamelist[] = [
-                'name' => $faker->name,
-                'street' => $faker->streetName,
-                'houseNumber' => $faker->numberBetween(1, 100),
-                'flatNumber' => $faker->numberBetween(1, 100)
-            ];
-        }
+//         for ($i = 0; $i < 3; $i++) {
+//             $gamelist[] = [
+//                 'name' => $faker->name,
+//                 'street' => $faker->streetName,
+//                 'houseNumber' => $faker->numberBetween(1, 100),
+//                 'flatNumber' => $faker->numberBetween(1, 100)
+//             ];
+//         }
 
 
-dump ($request);
-        return view('game.index', [
-            'gamelist' => $gamelist
+// dump ($request);
+//         return view('game.index', [
+//             'gamelist' => $gamelist
 
+//         ]);
+
+        //$games = DB::table('games')
+        //    ->select('id', 'title', 'score', 'genre_id')
+        //    ->get();
+
+        $games = DB::table('games')
+            ->join('genres', 'games.genre_id', '=', 'genres.id')
+            ->select(
+                'games.id', 'games.title', 'games.score',
+                'genres.id as genre_id', 'genres.name as genre_name'
+            )
+            ->get();
+
+        $bestGames = DB::table('games')
+            ->join('genres', 'games.genre_id', '=', 'genres.id')
+            ->select(
+                'games.id', 'games.title', 'games.score',
+                'genres.id as genre_id', 'genres.name as genre_name'
+            )
+            ->where('score', '>', 90)
+            //->where('score', 91) // default: =
+            ->get();
+
+        /*
+            $query = DB::table('games')
+                ->select('id', 'title', 'score', 'genre_id')
+                ->where([
+                    ['score', '>', 20],
+                    ['id', 55]
+                ])
+            ;
+        */
+
+        /*
+        $query = DB::table('games')
+            ->select('id', 'title', 'score', 'genre_id')
+            ->where('score', '>', 95)
+            ->orWhere('id', 55)
+        ;
+        */
+
+        $query = DB::table('games')
+            ->select('id', 'title', 'score', 'genre_id')
+            ->whereIn('id', [22, 42, 53])
+            //->whereBetween('id', [33, 35])
+        ;
+
+//dd($query->get());
+//dd($query->toSql());
+
+        $stats = [
+            'count' => DB::table('games')->count(),
+            'countScoreGtSeven' => DB::table('games')->where('score', '>', 70)->count(),
+            'max' => DB::table('games')->max('score'),
+            'min'=> DB::table('games')->min('score'),
+            'avg'=> DB::table('games')->avg('score'),
+        ];
+
+        return view('game.list', [
+            'games' => $games,
+            'bestGames' => $bestGames,
+            'stats' => $stats
         ]);
+
 
     }
 
@@ -71,9 +136,16 @@ dump ($request);
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(int $gameId)//: View
     {
-        dump ('AKCJA show');
+        //$game = DB::table('games')->where('id', $gameId)->get();
+        //$game = DB::table('games')->where('id', $gameId)->first();
+
+        $game = DB::table('games')->find($gameId);
+
+        return view('game.show', [
+            'game' => $game
+        ]);
     }
 
     /**

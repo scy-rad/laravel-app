@@ -36,5 +36,6 @@ class ProfilController extends Controller
     public function show(Request $request, int $id)
     {
         dd('pierwszy kontroler ' . $id);
+        return view('user.profile');
     }
 }
