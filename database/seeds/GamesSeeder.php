@@ -17,6 +17,9 @@ class GamesSeeder extends Seeder
      */
     public function run()
     {
+
+        DB::table('games')->truncate();
+
         $faker = Factory::create();
         // for ($i=0; $i < 100; $i++) {
         // DB::table('games')->insert([
@@ -31,7 +34,7 @@ class GamesSeeder extends Seeder
         // ]);
         // }
 
-        for ($j = 0; $j < 1; $j++) {
+        for ($j = 0; $j < 5; $j++) {
         $games=[];
         for ($i=0; $i < 100; $i++) {
             $games[]=[
