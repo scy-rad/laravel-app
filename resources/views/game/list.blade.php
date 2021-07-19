@@ -83,6 +83,32 @@
         </div>
     </div>
 
+
+    <div class="card mb-3">
+        <div class="card-header"><i class="fas fa-table mr-1"></i>Statystyka ocen</div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th>Ocena</th>
+                        <th>Liczba gier z daną oceną</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($scoreStats ?? [] as $stat)
+                        <tr>
+                            <td>{{ $stat->score }}</td>
+                            <td>{{ $stat->count }}</td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
     <div class="card mb-3">
         <div class="card-header"><i class="fas fa-table mr-1"></i>Best of the best</div>
         <div class="card-body">
