@@ -6,7 +6,7 @@
 
         <title>@yield('title', $applicationName)</title>
         <meta name="description" content=""/>
-
+        <link href = {{ asset("bootstrap/css/bootstrap.css") }} rel="stylesheet" />
         <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
     </head>
     <body class="sb-nav-fixed">
@@ -30,7 +30,7 @@
                         <div class="sb-sidenav-footer">
                             Sidenav Footer
                         </div>
-                    @show  <!-- kończy sekcję i ją wyświetla -->
+                    @show
                 </nav>
             </div>
             <div id="layoutSidenav_content">

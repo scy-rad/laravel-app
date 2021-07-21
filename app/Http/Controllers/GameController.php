@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+//use Doctrine\DBAL\Schema\View;
 use Illuminate\Http\Request;
 use Faker\Factory;
 use Illuminate\Support\Facades\DB;
+use Illuminate\View\View;
 
 class GameController extends Controller
 {
@@ -16,12 +18,39 @@ class GameController extends Controller
     // D - delete
 
 
+    public function index(): View
+        {
+
+        //$games = DB::table('games')
+        //    ->select('id', 'title', 'score', 'genre_id')
+        //    ->get();
+
+        $games = DB::table('games')
+            ->join('genres', 'games.genre_id', '=', 'genres.id')
+            ->select(
+                'games.id', 'games.title', 'games.score',
+                'genres.id as genre_id', 'genres.name as genre_name'
+            )
+            // ->orderBy('score', 'desc')
+            // ->orderByDesc('score')
+            // ->limit(5)
+            // ->offset(4) //rozpocznij wyświetlanie od podanego elementu
+            //->get();
+            ->paginate(10);
+            //->simplepaginate(10);
+
+
+            return view('game.list', [
+                'games' => $games
+            ]);
+        }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function dashboard(): View
     {
         //
 
@@ -43,17 +72,7 @@ class GameController extends Controller
 
 //         ]);
 
-        //$games = DB::table('games')
-        //    ->select('id', 'title', 'score', 'genre_id')
-        //    ->get();
 
-        $games = DB::table('games')
-            ->join('genres', 'games.genre_id', '=', 'genres.id')
-            ->select(
-                'games.id', 'games.title', 'games.score',
-                'genres.id as genre_id', 'genres.name as genre_name'
-            )
-            ->get();
 
         $bestGames = DB::table('games')
             ->join('genres', 'games.genre_id', '=', 'genres.id')
@@ -107,8 +126,7 @@ class GameController extends Controller
             ->orderBy('count','desc')
             ->get();
 
-        return view('game.list', [
-            'games' => $games,
+        return view('game.dashboard', [
             'bestGames' => $bestGames,
             'stats' => $stats,
             'scoreStats' => $scoreStats

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\GameController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -41,11 +42,14 @@ Route::patch($uri, fn() => 'jestem PATCH');
 Route::delete($uri, fn() => 'jestem DELETE');
 */
 
-Route::resource('games', 'GameController');
+Route::get('games/dashboard', 'GameController@dashboard')
+    ->name('games.dashboard');
 
+Route::resource('games', 'GameController');
 // -> only([
 //     'index', 'show'
 // ]);
+
 Route::resource('admin/games', 'GameController')
 -> only([
     'store', 'create', 'destroy'
