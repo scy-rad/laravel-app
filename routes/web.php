@@ -42,10 +42,20 @@ Route::patch($uri, fn() => 'jestem PATCH');
 Route::delete($uri, fn() => 'jestem DELETE');
 */
 
-Route::get('games/dashboard', 'GameController@dashboard')
-    ->name('games.dashboard');
+Route::group(['prefix' => 'b/games'], function() {
 
-Route::resource('games', 'GameController');
+    Route::get('dashboard', 'GameController@dashboard')
+        ->name('games.dashboard');
+
+    Route::get('', 'GameController@index')
+        ->name('games.list');
+
+    Route::get('{game}', 'GameController@show')
+        ->name('games.show');
+});
+
+
+//Route::resource('b/games', 'GameController');
 // -> only([
 //     'index', 'show'
 // ]);

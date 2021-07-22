@@ -16,7 +16,7 @@
                 </li>
             </ul>
 
-            <a href="{{ route('games.index') }}" class="btn btn-light">Lista gier</a>
+            <a href="{{ route('games.list') }}" class="btn btn-light">Lista gier</a>
         </div>
     @else
         <h5 class="card-header">Brak danych do wyświetlenia</h5>
