@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Game;
 
 //use Doctrine\DBAL\Schema\View;
 use Illuminate\Http\Request;
 use Faker\Factory;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
+use App\Http\Controllers\Controller;
 
-class GameController extends Controller
+class EloquentController extends Controller
 {
 
     // CRUD
@@ -40,7 +41,7 @@ class GameController extends Controller
             //->simplepaginate(10);
 
 
-            return view('game.list', [
+            return view('game.eloquent.list', [
                 'games' => $games
             ]);
         }
@@ -126,7 +127,7 @@ class GameController extends Controller
             ->orderBy('count','desc')
             ->get();
 
-        return view('game.dashboard', [
+        return view('game.eloquent.dashboard', [
             'bestGames' => $bestGames,
             'stats' => $stats,
             'scoreStats' => $scoreStats
@@ -169,42 +170,9 @@ class GameController extends Controller
 
         $game = DB::table('games')->find($gameId);
 
-        return view('game.show', [
+        return view('game.eloquent.show', [
             'game' => $game
         ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        dump ('AKCJA edit');
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        dump ('AKCJA update');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        dump ('AKCJA destroy');
-    }
 }

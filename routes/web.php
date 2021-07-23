@@ -14,8 +14,46 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'Home\MainPage')
-    ->name('home.mainPage');
+
+Route::group([
+    'prefix' => 'b/games',
+    'namespace' => 'Game',
+    'as' => 'games.b.'
+], function() {
+
+    Route::get('dashboard', 'BuilderController@dashboard')
+        ->name('dashboard');
+
+    Route::get('', 'BuilderController@index')
+        ->name('list');
+
+    Route::get('{game}', 'BuilderController@show')
+        ->name('show');
+});
+
+
+
+Route::group([
+    'prefix' => 'e/games',
+    'namespace' => 'Game',
+    'as' => 'games.e.'
+], function() {
+
+    Route::get('dashboard', 'EloquentController@dashboard')
+        ->name('dashboard');
+
+    Route::get('', 'EloquentController@index')
+        ->name('list');
+
+    Route::get('{game}', 'EloquentController@show')
+        ->name('show');
+});
+
+
+
+
+ Route::get('/', 'Home\MainPage')
+     ->name('home.mainPage');
 
 Route::get('users', 'UserController@list')
     ->name('get.users');
@@ -41,19 +79,6 @@ Route::put($uri, fn() => 'jestem PUT');
 Route::patch($uri, fn() => 'jestem PATCH');
 Route::delete($uri, fn() => 'jestem DELETE');
 */
-
-Route::group(['prefix' => 'b/games'], function() {
-
-    Route::get('dashboard', 'GameController@dashboard')
-        ->name('games.dashboard');
-
-    Route::get('', 'GameController@index')
-        ->name('games.list');
-
-    Route::get('{game}', 'GameController@show')
-        ->name('games.show');
-});
-
 
 //Route::resource('b/games', 'GameController');
 // -> only([
