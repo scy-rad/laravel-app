@@ -25,9 +25,66 @@ class EloquentController extends Controller
     public function index(): View
         {
 
+        // $newGame = new game();
+        // $newGame->title = 'Tomb Raider';
+        // $newGame->description = 'Przygoda, skarby';
+        // $newGame->score = 9;
+        // $newGame->publisher = 'Edios';
+        // $newGame->genre_id = 4;
+        // $newGame->save();
+
+        // Game::create([
+        //     'title' => 'Tomb Raider 2',
+        //     'description' => 'Przygoda, skarby',
+        //     'score' => 8,
+        //     'publisher' => 'Edios',
+        //     'genre_id' => 4
+        // ]);
+
+        // $newGame = new game([
+        //     'title' => 'Tomb Raider 3',
+        //     'description' => 'Przygoda, skarby',
+        //     'score' => 8,
+        //     'publisher' => 'Edios',
+        //     'genre_id' => 4
+        // ]);
+        // $newGame->save();
+
+
+        // $game = Game::find(123);
+        // dump($game);
+        // $game->description = 'Opis po aktualizacji';
+        // $game->save();
+
+        // $gameIds = [123,124,125,126];
+        // foreach ($gameIds as $gameId) {
+        //     $game = Game::find($gameId);
+        //     $game->description = 'Opis w pętli '.$gameId;
+        //     $game->save();
+        // }
+
+        // $gameIds = [123,124,125,126];
+        // Game::whereIn('id', $gameIds)
+        //     ->update([
+        //         'description' => 'Opis w Where In '
+        //     ]);
+
+
+
+
+
+        // $game = Game::find(124);
+        // $game->delete();
+
+        // Game::destroy(125);
+        // Game::destroy(126, 127, 128);        // wywoływane jest X zapytań - dla każdego ID osobne zapytanie
+        // Game::destroy([129, 130, 131]);      // wywoływane jest X zapytań - dla każdego ID osobne zapytanie
+
+        // Game::whereIn('id',[132, 133, 134])->delete();  // wywoływane jest 1 zapytanie
 
 
         $games = Game::with('genre')
+          ->publisher('Edios')
           ->orderBy('created_at')
           ->paginate(10);
 

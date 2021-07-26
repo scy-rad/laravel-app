@@ -12,6 +12,11 @@ class Game extends Model
 {
     //use HasFactory;
 
+
+    protected $fillable =[  //zawiera właściwości, które możemy nadpisywać (np. za pomocą metody Eloquenta create)
+        'title', 'description', 'score', 'publisher', 'genre_id'
+    ];
+
     // protected $table = 'nazwa_tabeli_danych';
     // protected $table = 'games'; //default
     // protected $primaryKey = 'id'; //default
@@ -46,6 +51,12 @@ class Game extends Model
     {
      return $query
             ->where('genre_id', $genreID);
+    }
+
+    public function scopePublisher(Builder $query, string $name) : Builder
+    {
+     return $query
+            ->where('publisher', $name);
     }
 
 }
