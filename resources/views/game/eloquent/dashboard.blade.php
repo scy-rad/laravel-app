@@ -118,7 +118,7 @@
                         <th>Lp</th>
                         <th>Tytuł</th>
                         <th>Ocena</th>
-                        <th>Kategoria</th>
+                        <th>Gatunek</th>
                         <th>Opcje</th>
                     </tr>
                     </thead>
@@ -128,7 +128,7 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $game->title }}</td>
                             <td>{{ $game->score }}</td>
-                            <td>{{ $game->genre_name }}</td>
+                            <td>{{ $game->genre->name }}</td>
                             <td>
                                 <a href="{{ route('games.b.show', ['game' => $game->id]) }}">Szczegóły</a>
                             </td>
