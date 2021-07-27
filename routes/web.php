@@ -25,6 +25,7 @@ Route::group([
         ->name('dashboard');
 
     Route::get('', 'BuilderController@index')
+        ->middleware([\App\Http\Middleware\NoPageZero::class])
         ->name('list');
 
     Route::get('{game}', 'BuilderController@show')
@@ -36,11 +37,21 @@ Route::group([
 Route::group([
     'prefix' => 'e/games',
     'namespace' => 'Game',
-    'as' => 'games.e.'
+    'as' => 'games.e.',
+    //'middleware' => ['profiling'],    //1 sposób podpięcia middleware jako grupy
+    //'middleware' => [\App\Http\Middleware\RequestLog::class],    //1 sposób podpięcia konkretnego middleware
 ], function() {
 
+    // Route::middleware(['profiling'])->group(
+    //     function(){
+    //         //i tu dajemy routy, które mają być opakowane middlewarem   //2 sposób podpięcia middleware pod kilka route'ów
+    //     }
+    // );
+
     Route::get('dashboard', 'EloquentController@dashboard')
-        ->name('dashboard');
+        ->name('dashboard')
+        //->middleware(['profiling'])                                  //3 sposób podpięcia middleware do konkretnego route
+        ;
 
     Route::get('', 'EloquentController@index')
         ->name('list');
