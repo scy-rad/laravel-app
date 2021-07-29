@@ -15,6 +15,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 
+//Route::group(['middleware' => ['auth']], function() {
+Route::middleware(['auth'])->group(function() {             // to samo co wyżej
+
+
+
 Route::group([
     'prefix' => 'b/games',
     'namespace' => 'Game',
@@ -101,7 +106,10 @@ Route::resource('admin/games', 'GameController')
     'store', 'create', 'destroy'
 ]);
 
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+}); //auth
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+

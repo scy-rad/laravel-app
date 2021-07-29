@@ -16419,3 +16419,7 @@ body {
 .sb-sidenav-light .sb-sidenav-footer {
   background-color: #e9ecef;
 }
+
+#layoutAuthentication {
+  margin-top: 70px;
+}
