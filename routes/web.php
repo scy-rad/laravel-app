@@ -101,3 +101,7 @@ Route::resource('admin/games', 'GameController')
     'store', 'create', 'destroy'
 ]);
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

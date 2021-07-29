@@ -1,3 +1,15 @@
+// Import Bootstrap variables for use within theme
+@import "~bootstrap/scss/functions.scss";
+@import "~bootstrap/scss/variables.scss";
+
+// Import spacing variables
+@import "variables/spacing";
+
+// Import navigation variables
+@import "variables/navigation";
+
+
+/*
 // Body
 $body-bg: #f8fafc;
 
@@ -17,3 +29,5 @@ $yellow: #ffed4a;
 $green: #38c172;
 $teal: #4dc0b5;
 $cyan: #6cb2eb;
+
+*/
